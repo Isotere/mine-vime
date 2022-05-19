@@ -53,8 +53,10 @@ return require('packer').startup({
 
 		-- ToDo: https://github.com/preservim/nerdtree
 		use {
-			'preservim/nerdtree'
+			-- 'preservim/nerdtree'
+			'scrooloose/nerdtree'
 		}
+		use 'jistr/vim-nerdtree-tabs'
 		use 'ryanoasis/vim-devicons'
 
 
