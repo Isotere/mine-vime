@@ -1,3 +1,4 @@
+# https://nvchad.github.io/getting-started/setup
 
 PACKER_PATH=~/.local/share/nvim/site/pack/packer/start
 YCM_PATH=$(PACKER_PATH)/YouCompleteMe
@@ -5,13 +6,19 @@ YCM_PATH=$(PACKER_PATH)/YouCompleteMe
 uninstall: clear
 
 install: clear prepare deps
-	git clone --depth 1 https://github.com/wbthomason/packer.nvim $(PACKER_PATH)/packer.nvim
-	ln -snf $(PWD)/nvim ~/.config/nvim
+	git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+	nvim --headless -c 'hi NormalFloat guibg=#1e222a|q'
 	nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+	nvim --headless -c 'TSInstall go'
+	nvim --headless -c 'TSInstall latex|q'
+	nvim --headless -c 'TSInstall lua|q'
+	nvim --headless -c 'TSInstall php|q'
+	nvim --headless -c 'TSInstall python|q'
+	nvim --headless -c 'TSInstall javascript|q'
+	nvim --headless -c 'TSInstall typescript|q'
 
 clear:
 	chmod -R 777 ~/.local/share/nvim || exit 0
-	rm -rf nvim/plugin || exit 0
 	rm -rf ~/.local/share/nvim || exit 0
 	rm -fr ~/.local/share/nvim/site/pack || exit 0
 	rm -rf ~/.config/nvim || exit 0
@@ -41,9 +48,4 @@ deps:
 prepare:
 	brew upgrade neovim the_silver_searcher fzf bat htop fd ncdu tldr httpie git-delta ripgrep gnu-sed cmake
 
-space_vim:
-	cd SpaceVim && $(MAKE) install
-
-nv_chad:
-	cd NvChad && $(MAKE) install
 
